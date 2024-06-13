@@ -25,9 +25,16 @@ dnf install kagent
 
 # change port for tomcat in kagent
 cd /opt/gpudb/kagent/ui/conf
-vi server.xml
+
+egrep -rwn -e "KAGENT_TOMCAT_HTTP_PORT"
+
+vi /opt/gpudb/kagent/bin/kagent-ui
+
+
 ## change the port  8081 -> something else
 vi logs ../logs/
+
+
 
 ## restart the service
 systemctl restart kagent_ui
