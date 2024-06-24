@@ -48,20 +48,39 @@ installing on RHel 8
 headnode is 192.168.250.14
 user is curtis with sudo
 
+# Uninstall
 
-# stop all
+## stop all
 for i in hpe-pldl325g10p-{1..6}; then do ssh root@i "/opt/gpudb/core/bin/gpudb stop all"; done
 
-# See what is installed
+with pdsh
+```
+pdsh -w hpe-pldl325g10p-[1-6] "sudo su gpudb /opt/gpudb/core/bin/gpudb stop all"
+```
+
+## See what is installed
 yum list | grep gpudb
 
-# remove the installed gpudb binary
+## remove the installed gpudb binary
 dnf remove gpudb-intel-license.x86_64
 
-# on the headnode
-rm -rf /opt/gpudb
+with pdsh
+```
+pdsh -w hpe-pldl325g10p-[1-6] "sudo dnf remove -y gpudb-intel-license.x86_64" 
+```
 
-# Install repo
+## remove files
+```
+pdsh -w hpe-pldl325g10p-[1-6] "sudo rm -rf /opt/gpudb"
+```
+
+## remove user accounts
+```
+pdsh -w hpe-pldl325g10p-[1-6] "sudo userdel --remove gpudb; sudo usredel --remove gpudb_proc; sudo groupdel gpudb"
+```
+
+# Install GPUDB
+## Install repo
 dnf config-manager --add-repo https://repo.kinetica.com/yum/7.2/CentOS/8/x86_64/kinetica-7.2.repo
 
 # Install kagent
