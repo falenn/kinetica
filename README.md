@@ -8,6 +8,8 @@ user is curtis with sudo
 # stop all
 for i in hpe-pldl325g10p-{1..6}; then do ssh root@i "/opt/gpudb/core/bin/gpudb stop all"; done
 
+--> Something needs to be done to stop the tomcat server for kagent-ui <--
+
 # See what is installed
 yum list | grep gpudb
 
