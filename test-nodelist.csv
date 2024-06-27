@@ -1,0 +1,4 @@
+node,alias,role,publicip,privateip
+hpe-pldl325g10p-2,test2,head,192.168.250.15,192.168.250.15
+hpe-pldl325g10p-3,test3,worker,192.168.250.16,192.168.250.16
+hpe-pldl325g10p-4,test4,worker,192.168.250.17,192.168.250.17
