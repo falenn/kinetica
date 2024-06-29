@@ -1,0 +1,134 @@
+{
+  "workbook": {
+    "metadata": {},
+    "config": {},
+    "id": "e0ee6ab0-3503-11ef-87c0-13dd897051e3",
+    "name": "test",
+    "description": "Description for test",
+    "user_id": "c2bba250-3441-11ef-b84a-bf2f4934df41",
+    "warehouse_id": null,
+    "is_example": false,
+    "is_shared": false,
+    "created_at": "2024-06-28T04:07:04.668Z",
+    "updated_at": "2024-06-29T00:05:33.158Z",
+    "userId": "c2bba250-3441-11ef-b84a-bf2f4934df41"
+  },
+  "worksheets": [
+    {
+      "config": {
+        "chat_messages": []
+      },
+      "id": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+      "name": "Sheet 1",
+      "description": "Description for Sheet 1",
+      "previous_worksheet_id": null,
+      "next_worksheet_id": null,
+      "workbook_id": "e0ee6ab0-3503-11ef-87c0-13dd897051e3",
+      "created_at": "2024-06-28T04:07:04.698Z",
+      "updated_at": "2024-06-29T00:05:33.156Z",
+      "workbookId": "e0ee6ab0-3503-11ef-87c0-13dd897051e3"
+    }
+  ],
+  "blockMap": {
+    "e0f325a0-3503-11ef-87c0-13dd897051e3": [
+      {
+        "config": {},
+        "id": "e0f6cf20-3503-11ef-87c0-13dd897051e3",
+        "name": "Block 1",
+        "description": "Description for Block 1",
+        "content": "\"CREATE or replace data source S3_bathymetry\\nlocation = 'S3'\\nwith options (\\n    bucket name = 'noaa-bathymetry-pds',\\n    region = 'us-east-1'\\n)\"",
+        "previous_block_id": "88c296d0-3504-11ef-87c0-13dd897051e3",
+        "next_block_id": "61339ea0-350b-11ef-87c0-13dd897051e3",
+        "block_type_id": "84b9233c-14e3-11eb-adc1-0242ac120002",
+        "worksheet_id": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "created_at": "2024-06-28T04:07:04.722Z",
+        "updated_at": "2024-06-28T05:00:49.182Z",
+        "worksheetId": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "blockTypeId": "84b9233c-14e3-11eb-adc1-0242ac120002"
+      },
+      {
+        "config": {},
+        "id": "88c296d0-3504-11ef-87c0-13dd897051e3",
+        "name": "Block",
+        "description": "Description for Block",
+        "content": "[{\"type\":\"paragraph\",\"children\":[{\"text\":\"Create a data source connecting to the NOAA opensource bathymetry data on S3:\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"https://aws.amazon.com/marketplace/pp/prodview-zetjfybagtrl2?sr=0-7&ref_=beagle&applicationId=AWSMPContessa#overview \"}]}]",
+        "previous_block_id": null,
+        "next_block_id": "e0f6cf20-3503-11ef-87c0-13dd897051e3",
+        "block_type_id": "a9949a1a-14e3-11eb-adc1-0242ac120002",
+        "worksheet_id": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "created_at": "2024-06-28T04:11:46.237Z",
+        "updated_at": "2024-06-28T04:12:59.942Z",
+        "worksheetId": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "blockTypeId": "a9949a1a-14e3-11eb-adc1-0242ac120002"
+      },
+      {
+        "config": {},
+        "id": "8a482560-3504-11ef-87c0-13dd897051e3",
+        "name": "Block",
+        "description": "Description for Block",
+        "content": "\"load data into bathymetry\\nfrom file paths 'csv/'\\nformat text (\\n    includes header = true\\n)\\nwith options (\\n    data source = 'S3_bathymetry',\\n    on error = skip,\\n    subscribe = true,\\n    poll_interval = 3600,\\n    fields mapped by name(UNIQUE_ID,FILE_UUID,LON,LAT,DEPTH,TIME,PLATFORM_NAME,PROVIDER)\\n)\"",
+        "previous_block_id": "61339ea0-350b-11ef-87c0-13dd897051e3",
+        "next_block_id": "b167ea90-3509-11ef-87c0-13dd897051e3",
+        "block_type_id": "84b9233c-14e3-11eb-adc1-0242ac120002",
+        "worksheet_id": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "created_at": "2024-06-28T04:11:48.790Z",
+        "updated_at": "2024-06-28T06:05:30.405Z",
+        "worksheetId": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "blockTypeId": "84b9233c-14e3-11eb-adc1-0242ac120002"
+      },
+      {
+        "config": {},
+        "id": "7e0a5980-3509-11ef-87c0-13dd897051e3",
+        "name": "Block",
+        "description": "Description for Block",
+        "content": "\"delete from ki_home.bathymetry;\\ndrop table ki_home.bathymetry;\"",
+        "previous_block_id": "b167ea90-3509-11ef-87c0-13dd897051e3",
+        "next_block_id": null,
+        "block_type_id": "84b9233c-14e3-11eb-adc1-0242ac120002",
+        "worksheet_id": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "created_at": "2024-06-28T04:47:15.736Z",
+        "updated_at": "2024-06-28T04:57:30.345Z",
+        "worksheetId": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "blockTypeId": "84b9233c-14e3-11eb-adc1-0242ac120002"
+      },
+      {
+        "config": {},
+        "id": "b167ea90-3509-11ef-87c0-13dd897051e3",
+        "name": "Block",
+        "description": "Description for Block",
+        "content": "[{\"type\":\"paragraph\",\"children\":[{\"text\":\"Helper to delete all the records in the table to practice loading\"}]}]",
+        "previous_block_id": "8a482560-3504-11ef-87c0-13dd897051e3",
+        "next_block_id": "7e0a5980-3509-11ef-87c0-13dd897051e3",
+        "block_type_id": "a9949a1a-14e3-11eb-adc1-0242ac120002",
+        "worksheet_id": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "created_at": "2024-06-28T04:48:41.913Z",
+        "updated_at": "2024-06-28T05:00:49.186Z",
+        "worksheetId": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "blockTypeId": "a9949a1a-14e3-11eb-adc1-0242ac120002"
+      },
+      {
+        "config": {},
+        "id": "61339ea0-350b-11ef-87c0-13dd897051e3",
+        "name": "Block",
+        "description": "Description for Block",
+        "content": "[{\"type\":\"paragraph\",\"children\":[{\"text\":\"Load data from the s3 bucket.  Data loaded as csv/2022/ path will fetch all of the files contained in the path, assuming they are all CSV and with the same headers.\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Loading this data will result in a row that has an invalid date:\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"API Error: Execute SQL - Unknown: To skip errors while loading specify the option 'ON ERROR=SKIP' (ColumnName:TIME)(ColumnType:datetime)(Ex:Invalid year: 8936 in date: 8936-07-31T15:51:21.000Z valid range: [1000-2900] )(File:csv/2022/01/08/20220108_f5513111a7bd662334753b8e95fd5bbb_pointData.csv)(Table:\\\"ki_home.bathymetry\\\")(Value:8936-07-31T15:51:21.000Z)(Worker:3)(E/EEFBc:942)(EF/EFRc:2091)\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"Now, the problem I have is the replay of the data.  Do we have to start over?  We are currently at 20 M records when this happened.  When it happened, without ON ERROR = SKIP, the insert transaction did not suceed and the table was dropped.  Ouch.\"}]},{\"type\":\"paragraph\",\"children\":[{\"text\":\"subscription keeps us from loading all of the data at once.\"}]}]",
+        "previous_block_id": "e0f6cf20-3503-11ef-87c0-13dd897051e3",
+        "next_block_id": "8a482560-3504-11ef-87c0-13dd897051e3",
+        "block_type_id": "a9949a1a-14e3-11eb-adc1-0242ac120002",
+        "worksheet_id": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "created_at": "2024-06-28T05:00:46.346Z",
+        "updated_at": "2024-06-28T05:55:15.334Z",
+        "worksheetId": "e0f325a0-3503-11ef-87c0-13dd897051e3",
+        "blockTypeId": "a9949a1a-14e3-11eb-adc1-0242ac120002"
+      }
+    ]
+  },
+  "vizMap": {
+    "e0f6cf20-3503-11ef-87c0-13dd897051e3": [],
+    "88c296d0-3504-11ef-87c0-13dd897051e3": [],
+    "8a482560-3504-11ef-87c0-13dd897051e3": [],
+    "7e0a5980-3509-11ef-87c0-13dd897051e3": [],
+    "b167ea90-3509-11ef-87c0-13dd897051e3": [],
+    "61339ea0-350b-11ef-87c0-13dd897051e3": []
+  }
+}
