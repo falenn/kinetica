@@ -83,12 +83,19 @@ dnf install --refresh --downloadonly --forcearch x86_64 --downloaddir /root/rpms
 ```
 
 # Install using kagent (No UI)
+Aid built in this project.
+
+# Modifying GPUDB.conf
+/opt/gpudb/core/etc/gpudb.conf file is found on the head node.  Modify this file to tune the cluster.
+Read:  https://docs.kinetica.com/7.1/install/package/?search-highlight=numa#id-7b11aae8-0073-53ed-b31a-8950572cc572
+
+## Restart gpudb processes after gpudb.conf updated
+./kagent cluster control test restart all_gpudb
 
 
-
-
-                                                                                                                     
-# Install PDSH
+# Pdsh Aid
+                                                                                                                   
+## Install PDSH
 
 Aid with PDSH
 Source: 
@@ -106,8 +113,19 @@ https://www.rittmanmead.com/blog/2014/12/linux-cluster-sysadmin-ssh-keys/
 openssl rsa -in ~/.ssh/id_rsa -outform pem > id_rsa.pem
 chmod 700 id_rsa.pem
 
-# pdsh
+## pdsh mods to bash_profile
 export LD_LIBRARY_PATH=/usr/local/lib/pdsh:$LD_LIBRARY_PATH
 export PDSH_RCMD_TYPE=ssh
 export PDSH_SSH_ARGS_APPEND="-l root"
+
+## j2cli to aid with property file management
+As we can see, at this point, I should probably start using Ansible.  Kinetic install, however, is already in Ansible.  
+We can acheive some aid in modifying gpudb.conf using j2cli, or we can overwrite the gpudb.conf with a desired copy.
+
+```
+sudo pip3 install j2cli
+```
+
+# Installing docker / Containerd
+-> https://stackoverflow.com/questions/57221919/install-docker-ce-on-redhat-8
 
