@@ -168,11 +168,15 @@ chmod u+x kubectl
 ## storageclass mock
 default is rancher.io/local-path
 
-#sho repos
+#show repos
 helm repo list
 
 # show charts
 helm search repo <repo name>
+
+## install helm chart
+
+
 
 # Installing k8s
 
@@ -288,5 +292,40 @@ kubectl get pods -n calico-system
 
 ```
 
+## install ingress
+Quick ingress installation using nodePort - no cloud-provided ALB
+On second thought, don't do this.  Kinetica will install nginx.  Also, we should install using helm.
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/baremetal/deploy.yaml
+
+```
+Why helm? removing the ingress is much cleaner with a helm chart.
 
 
+## Install Local-path storageclass
+This is a temporary storage solution, good for single-node k8s cluster / testing
+https://github.com/rancher/local-path-provisioner
+```
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.28/deploy/local-path-storage.yaml
+```
+This will create storageclass for PVC storing data at /opt/local-path-provisioner
+Verify:
+```
+kubectl create -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/examples/pvc/pvc.yaml
+kubectl create -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/examples/pod/pod.yaml
+kubectl -n local-path-storage logs -f -l app=local-path-provisioner
+```
+
+### set as default
+```
+kubectl get storageclass
+
+kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
+
+
+## Installing Kinetica
+
+```
+helm -n kinetica-system upgrade -i kinetica-operators kinetica-operators/kinetica-operators --values values.onPrem.k8s.yaml --set db.gpudbCluster.license=mINVc+nGq36n-NEc6cwnBYCqL-b/LVKG8dK+yI-nvlFF3XyL0Wy-mOaw4bVpxDHpNkYEnKLEXJGsZVRsuJhO --set dbAdminUser.password=GPUdb123! --create-namespace --set global.defaultStorageClass=local-path
+```
