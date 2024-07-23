@@ -329,3 +329,18 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storagec
 ```
 helm -n kinetica-system upgrade -i kinetica-operators kinetica-operators/kinetica-operators --values values.onPrem.k8s.yaml --set db.gpudbCluster.license=mINVc+nGq36n-NEc6cwnBYCqL-b/LVKG8dK+yI-nvlFF3XyL0Wy-mOaw4bVpxDHpNkYEnKLEXJGsZVRsuJhO --set dbAdminUser.password=GPUdb123! --create-namespace --set global.defaultStorageClass=local-path
 ```
+
+
+## Show installed helm charts
+```
+helm ls -A
+```
+
+## Uninstall helm chart
+```
+helm uninstall kinetica-operators -n kinetica-system
+```
+
+https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0
+
+curl -sS https://webinstall.dev/k9s | bash
